@@ -44,3 +44,4 @@ ruby lab_booking/app.rb
   - Stores custom error classes like `BookingError`.
 - `test/test_booking.rb`
   - Automated tests using Minitest (built into Ruby).
+---
