@@ -12,6 +12,7 @@ class Resource
     @name = name
     @category = category
     @current_booking = nil
+    @time_based_bookings = []
   end
 
   def available?
@@ -28,5 +29,26 @@ class Resource
 
   def current_booking
     @current_booking
+  end
+
+  # Time-based booking methods
+  def available_for_time_slot?(start_time, end_time)
+    @time_based_bookings.none? { |booking| booking.overlaps?(start_time, end_time) }
+  end
+
+  def assign_time_based_booking(booking)
+    @time_based_bookings << booking
+  end
+
+  def clear_time_based_booking(booking)
+    @time_based_bookings.delete(booking)
+  end
+
+  def time_based_bookings
+    @time_based_bookings.select(&:active?)
+  end
+
+  def all_time_based_bookings
+    @time_based_bookings.dup
   end
 end
